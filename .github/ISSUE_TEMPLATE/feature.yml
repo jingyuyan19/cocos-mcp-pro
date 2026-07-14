@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a workflow or safety improvement
+title: "[Feature] "
+labels: [enhancement, needs-triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Real workflow problem
+      description: Describe the task and failure mode, not only a desired tool name.
+    validations:
+      required: true
+  - type: textarea
+    id: current-workaround
+    attributes:
+      label: Current workaround
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Verification, guardrail, and recovery expectations
+      description: Explain how a user could tell the change really happened and recover from a bad result.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Creator version and MCP client
+      placeholder: Creator 3.8.8, Cursor
+    validations:
+      required: true
