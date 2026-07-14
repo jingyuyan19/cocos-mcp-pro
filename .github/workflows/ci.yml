@@ -1,0 +1,45 @@
+name: Public CI
+
+on:
+  push:
+    branches: [main, "sync/**", "docs/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  public-quality:
+    name: public-quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+
+      - name: Validate paths, JSON, secrets, and 5 MB limit
+        run: node scripts/validate-repository.mjs
+
+      - name: Validate Markdown formatting
+        run: npx --yes markdownlint-cli2@0.17.2 "**/*.md"
+
+      - name: Parse JSON and YAML formatting
+        run: npx --yes prettier@3.5.3 --check "**/*.{json,yml,yaml}"
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress "**/*.md"
+          fail: true
+
+      - name: Scan Git history for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

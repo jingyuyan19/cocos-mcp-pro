@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cocos-creator": {
+      "command": "/path/to/your-cocos-project/temp/.cocos-mcp-launcher.sh",
+      "args": []
+    }
+  }
+}

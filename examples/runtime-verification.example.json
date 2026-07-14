@@ -1,0 +1,21 @@
+{
+  "workflow": "inspect-mutate-verify-recover",
+  "target": {
+    "nid": 8,
+    "componentIndex": 1,
+    "expectedComponentType": "cc.Label"
+  },
+  "mutation": {
+    "tool": "cocos_set_component_property",
+    "property": "string",
+    "value": "FIRE"
+  },
+  "verification": {
+    "tool": "cocos_inspect_node",
+    "expectedObservedValue": "FIRE"
+  },
+  "recovery": {
+    "tool": "cocos_mcp_undo_last",
+    "verifyAfterUndo": true
+  }
+}
