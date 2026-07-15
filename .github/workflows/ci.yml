@@ -33,10 +33,13 @@ jobs:
       - name: Parse JSON and YAML formatting
         run: npx --yes prettier@3.5.3 --check "**/*.{json,yml,yaml}"
 
+      - name: Check tracked purchase links without recording clicks
+        run: node scripts/check-attribution-links.mjs
+
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress "**/*.md"
+          args: --no-progress --exclude '^https://go\.jimmyjing\.dev/' "**/*.md"
           fail: true
 
       - name: Scan Git history for secrets
