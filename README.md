@@ -4,6 +4,8 @@
 
 让AI更安全地操作Cocos Creator场景：**先读真实层级，再做受控写入；结果可验证，改动可撤销，危险操作有护栏。**
 
+> **不确定你的环境能不能用？** [先看46秒真实撤销证据，并提交购买前兼容性确认](https://go.jimmyjing.dev/compatibility?source=github-prepurchase-compat-v2-20260731)。请带上Creator版本、操作系统、MCP客户端和一个具体任务；不适合我也会直接说明。
+
 [购买Cocos MCP Pro](https://go.jimmyjing.dev/cocos/github/readme) · [观看核心演示](https://www.bilibili.com/video/BV1MHMa6oEjW/) · [观看安装教程](https://www.bilibili.com/video/BV17GNQ69EJP/)
 
 **兼容范围：**面向Cocos Creator 3.8.x，当前高强度运行验收环境为3.8.8；公开版本记录为v0.1.1。
