@@ -4,9 +4,11 @@
 
 Make AI-driven Cocos Creator scene editing safer: **inspect real runtime state, apply guarded changes, verify the result, and keep a recovery path.**
 
-[Buy Cocos MCP Pro](https://go.jimmyjing.dev/cocos/github/readme) · [Watch the product demo](https://www.bilibili.com/video/BV1MHMa6oEjW/) · [Watch the installation guide](https://www.bilibili.com/video/BV17GNQ69EJP/)
+[Buy Cocos MCP Pro](https://go.jimmyjing.dev/cocos/github/readme) · [Watch the feature overview](https://www.bilibili.com/video/BV1rVb46JEB8/) · [Watch the installation guide](https://www.bilibili.com/video/BV1MFb46FEso/)
 
-**Compatibility:** built for Cocos Creator 3.8.x and stress-tested on 3.8.8. The current public release record is v0.1.1.
+**Current store release: v0.2.0 (RC7).** Current acceptance covers macOS and Cocos Creator 3.8.8. Windows and other Creator patch versions have not completed equivalent acceptance. The v0.3.0 candidate is not released.
+
+**Known issue:** after an RC7 UI creation request times out, Creator may still complete it. A timeout receipt containing `changed:false` does not prove the scene is unchanged. Inspect the actual result before retrying or undoing; see the [timeout guidance (Chinese)](./docs/FAQ.md#rc7-timeout).
 
 ![Cocos MCP Pro installation in Cocos Creator](./assets/install-tutorial-cover.png)
 
@@ -21,7 +23,7 @@ Cocos MCP Pro uses a tighter workflow:
 1. Read the live Creator hierarchy and target nodes through session-scoped NIDs.
 2. Apply focused writes and verify observable runtime state.
 3. Guard component removal with `expectedComponentType` when needed.
-4. Keep critical writes in an undo workflow through `cocos_mcp_undo_last`.
+4. Use `cocos_mcp_undo_last` for supported operations after confirming their outcome and undo target. Reconcile unknown outcomes first.
 5. Return actionable diagnostics through `cocos_diagnose`.
 
 ## Start Here

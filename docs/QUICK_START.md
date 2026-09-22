@@ -36,9 +36,11 @@ v0.2.0配置直接记录Node和`bridge-cli.js`的绝对路径，并通过`--proj
 
 1. `cocos_get_hierarchy`
 2. `cocos_inspect_node`
-3. 选择一个低风险写操作，例如重命名或单个标量属性。
-4. 再次读取节点，确认运行态结果。
-5. 如需恢复，调用`cocos_mcp_undo_last`并再次读取验证。
+3. 给这个测试节点重命名，并记下原来的`name`。
+4. 再次用`cocos_inspect_node`读取同一节点，确认返回的`name`是新名称。RC7的节点读取不能独立验证Label字号等组件属性；此类属性需在Creator Inspector中另行核对。
+5. 确认写入成功且撤销目标就是最近一次MCP写入后，如需恢复，调用`cocos_mcp_undo_last`并再次读取，确认`name`恢复原值。
+
+如果UI创建超时或断连，先停下写入：RC7中Creator仍可能稍后完成，错误回执的`changed:false`不能作为没有改动或已回滚的保证。不要重复创建、自动保存或盲目撤销；保持当前工程与场景，先检查Creator现场，用`cocos_search_nodes`、`cocos_inspect_node`及日志核对实际结果，确认完成状态与撤销目标后再决定恢复。详见[FAQ中的超时处理说明](./FAQ.md#rc7-timeout)；未知结果识别修复属于未发布候选，尚未包含在商店RC7中。
 
 可把[规则模板](../examples/cursorrules.example.md)加入客户端规则，固定“先读、再改、再验证”的节奏。
 
