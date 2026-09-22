@@ -6,9 +6,11 @@
 
 > **不确定你的环境能不能用？** [先看46秒真实撤销证据，并提交购买前兼容性确认](https://go.jimmyjing.dev/compatibility?source=github-prepurchase-compat-v2-20260731)。请带上Creator版本、操作系统、MCP客户端和一个具体任务；不适合我也会直接说明。
 
-[购买Cocos MCP Pro](https://go.jimmyjing.dev/cocos/github/readme) · [观看核心演示](https://www.bilibili.com/video/BV1MHMa6oEjW/) · [观看安装教程](https://www.bilibili.com/video/BV17GNQ69EJP/)
+[购买Cocos MCP Pro](https://go.jimmyjing.dev/cocos/github/readme) · [观看功能概览](https://www.bilibili.com/video/BV1rVb46JEB8/) · [观看安装教程](https://www.bilibili.com/video/BV1MFb46FEso/)
 
-**兼容范围：**面向Cocos Creator 3.8.x，当前高强度运行验收环境为3.8.8；公开版本记录为v0.1.1。
+**当前商店版本：v0.2.0（RC7）。** 当前验收环境为macOS与Cocos Creator 3.8.8；Windows及其他Creator补丁版本未完成同等级验收。v0.3.0候选尚未发布。
+
+**已知问题：**RC7的UI创建请求超时后，Creator仍可能继续执行；超时回执中的`changed:false`不能证明场景没有变化。先核对实际结果，不直接重试或撤销，见[超时处理说明](./docs/FAQ.md#rc7-timeout)。
 
 ![Cocos MCP Pro安装与真实Creator界面](./assets/install-tutorial-cover.png)
 
@@ -23,7 +25,7 @@ Cocos MCP Pro把工作流收紧为：
 1. 读取Creator运行态层级，使用会话短ID（NID）定位目标。
 2. 对高频操作执行小步写入，并读取运行态结果作为回执。
 3. 删除组件前可用`expectedComponentType`校验类型。
-4. 关键写入进入撤销链，可用`cocos_mcp_undo_last`恢复。
+4. 对支持撤销且已核对执行结果和撤销目标的操作，可用`cocos_mcp_undo_last`恢复；未知结果先排查。
 5. 失败时用`cocos_diagnose`返回可执行的排查提示。
 
 ## 从这里开始
